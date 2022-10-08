@@ -5,9 +5,77 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Repetition-card</title>
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100;200;300;400;500&family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="./style.css" />
-    <script defer src="./index.js"></script>
+    <script defer src="./script.js"></script>
   </head>
-  <body></body>
+  <body>
+    <div class="cards-container" id="cards-container">
+      <!-- <div class="card">
+        <div class="card__inner-wrapper">
+          <h3 class="card__title">Complete Inspections</h3>
+          <p class="card__content">
+            Complete muiniciplity and internal inspection (foundation, framing and
+            QC).
+          </p>
+          <a href="#" class="card__link">link</a>
+          <br />
+          <div class="card__tag">Ventilation</div>
+          <br />
+          <time class="date">28 Dec 2022</time>
+        </div>
+      </div>
+      </div> -->
+
+    </div>
+
+    <!-- <div class="card">
+      <div class="card__inner-wrapper">
+        <h3 class="card__title">Complete Inspections</h3>
+        <p class="card__content">
+          Complete muiniciplity and internal inspection (foundation, framing and
+          QC).
+        </p>
+        <a href="#" class="card__link">link</a>
+        <br />
+        <div class="card__tag">Ventilation</div>
+        <br />
+        <time class="date">28 Dec 2022</time>
+      </div>
+    </div> -->
+    <!-- // Templates -->
+    <!-- /// card-template -->
+
+    <template id="card-template">
+      <div>
+        <div class="card">
+          <div class="card__inner-wrapper">
+            <h3 class="card__title"></h3>
+            <p class="card__content">
+              
+            </p>
+            <a href="#" class="card__link">link</a>
+            <br />
+            <div class="card__tag"></div>
+            <div class="date-wrapper" title="last seen">
+                <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                  <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                </svg>
+              <time class="date" id="lastSeenDate"></time>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </template>
+  </body>
 </html>
