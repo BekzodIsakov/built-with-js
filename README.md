@@ -4,9 +4,9 @@ Various things built with vanilla Javascript.
 main branch mainly contains empty files.
 Check other branches to see the real stuff
 
-What I've learnt
+What I've learnt in this project
 
-1. Connect google font via html vs css file - http://www.stevesouders.com/blog/2009/04/09/dont-use-import/ 26 👈 states that linking to the font in HTML is better for performance than importing into CSS.
+1. Connect google font via html vs css file - http://www.stevesouders.com/blog/2009/04/09/dont-use-import/ 👈 states that linking to the font in HTML is better for performance than importing into CSS.
 
 2.HTML <time> element - The <time> tag defines a specific time (or datetime).
 

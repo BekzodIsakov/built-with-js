@@ -97,8 +97,32 @@ a {
 }
 
 .card__title {
+  position: relative;
   font-size: 1.8rem;
   font-weight: 600;
+}
+
+.card__title--anchor {
+  color: inherit;
+  text-decoration: none;
+}
+
+.card__title--anchor::before {
+  content: " \01F4CE";
+  position: absolute;
+  right: 103%;
+  transition-duration: 300ms;
+  transform: rotateZ(10deg);
+  opacity: 0;
+}
+
+.card__title--anchor:hover::before {
+  right: 102%;
+  opacity: 1;
+}
+
+.card.selected .card__title {
+  color: var(--orange);
 }
 
 .card__content:not(:last-child) {
