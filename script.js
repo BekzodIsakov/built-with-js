@@ -69,8 +69,18 @@ const lessons = [
   },
 ];
 
-const randomNumber = Math.trunc(Math.random() * lessons.length);
-lessons[randomNumber].isSelected = true;
+selectRandomCard();
+
+function selectRandomCard() {
+  const currentRandomNum = JSON.parse(localStorage.getItem("currentRandomNum"));
+
+  do {
+    var randomNum = Math.trunc(Math.random() * lessons.length);
+  } while (randomNum === currentRandomNum);
+
+  lessons[randomNum].isSelected = true;
+  localStorage.setItem("currentRandomNum", JSON.stringify(randomNum));
+}
 
 function renderCards() {
   let selectedCard;
@@ -86,7 +96,6 @@ function renderCards() {
 
     titleAnchor.innerHTML = lesson.lessonName;
     titleAnchor.href = "#" + lesson.lessonName.replace(/\s/g, "-");
-    titleAnchor.name = "#" + lesson.lessonName.replace(/\s/g, "-");
 
     cardContent.innerHTML = lesson.content;
     cardLink.href = lesson.linkUrl;
@@ -106,7 +115,6 @@ function renderCards() {
   selectedCard.scrollIntoView({
     behavior: "smooth",
     block: "start",
-    inline: "start",
   });
 }
 

@@ -22,6 +22,7 @@ html {
 
 body {
   max-width: 210rem;
+  margin: 0 auto;
   font-size: 1.6rem;
   font-family: "Source Sans Pro", sans-serif;
   background-color: var(--off-white);
@@ -111,9 +112,11 @@ a {
   content: " \01F4CE";
   position: absolute;
   right: 103%;
-  transition-duration: 300ms;
+  transition-duration: 200ms;
   transform: rotateZ(10deg);
   opacity: 0;
+  /*👇 - avoid vibration once icon is hovered over */
+  pointer-events: none;
 }
 
 .card__title--anchor:hover::before {
