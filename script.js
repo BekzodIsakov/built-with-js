@@ -7,7 +7,9 @@ const matchedCharNthElem = document.getElementById("matched-char-nth");
 const searchCloseBtn = document.getElementById("search-close-btn");
 
 let matchedCharsCount = 0;
-let matchedCharNth = 0;
+let currentMatchIndex = 0;
+let prevMatchIndex = null;
+const matchedLessonsIndices = [];
 
 const MONTHS_NAMES = [
   "January",
@@ -99,6 +101,7 @@ function renderCards() {
     const cardElement = cardClone.querySelector(".card");
 
     const titleAnchor = cardElement.querySelector(".card__title--anchor");
+
     const cardContent = cardElement.querySelector(".card__content");
     const cardLink = cardElement.querySelector(".card__link");
     const cardTag = cardElement.querySelector(".card__tag");
@@ -131,22 +134,21 @@ function renderCards() {
 searchInput.addEventListener("keydown", (e) => searchByLesson(e));
 function searchByLesson(e) {
   const searchTxt = searchInput.value.toLowerCase();
-  matchedCharsCount = 0;
+  matchedLessonsIndices.length = 0;
 
   if (e.key === "Enter") {
     if (searchTxt) {
-      lessons.forEach((lesson) => {
+      lessons.forEach((lesson, index) => {
         if (lesson.lessonName.toLowerCase().includes(searchTxt)) {
-          matchedCharsCount++;
+          matchedLessonsIndices.push(index);
         }
       });
 
       searchCtrlBoard.classList.remove("hidden");
     }
 
-    matchedCharsTotalElem.innerHTML = matchedCharsCount;
-    matchedCharNth = matchedCharsCount ? 1 : 0;
-    matchedCharNthElem.innerHTML = matchedCharNth;
+    matchedCharsTotalElem.innerHTML = matchedLessonsIndices.length;
+    showMatchedLesson();
   }
 }
 
@@ -155,4 +157,44 @@ searchCloseBtn.onclick = closeSearchResult;
 function closeSearchResult() {
   searchCtrlBoard.classList.add("hidden");
   searchInput.value = "";
+}
+
+function showPrevMatch() {
+  prevMatchIndex = currentMatchIndex;
+
+  if (currentMatchIndex === 0) {
+    currentMatchIndex = matchedLessonsIndices.length - 1;
+  } else {
+    currentMatchIndex--;
+  }
+
+  showMatchedLesson(currentMatchIndex);
+}
+
+function showNextMatch() {
+  prevMatchIndex = currentMatchIndex;
+
+  if (currentMatchIndex === matchedLessonsIndices.length - 1) {
+    currentMatchIndex = 0;
+  } else {
+    currentMatchIndex++;
+  }
+  showMatchedLesson();
+}
+
+function showMatchedLesson() {
+  if (prevMatchIndex !== null) {
+    const prevMatch = cardsContainer.children[
+      matchedLessonsIndices[prevMatchIndex]
+    ].querySelector(".card__title--anchor");
+    prevMatch.classList.remove("highlighted");
+  }
+
+  const anchorTitle = cardsContainer.children[
+    matchedLessonsIndices[currentMatchIndex]
+  ].querySelector(".card__title--anchor");
+
+  matchedCharNthElem.innerHTML = currentMatchIndex + 1;
+  anchorTitle.classList.add("highlighted");
+  anchorTitle.scrollIntoView({ behavior: "smooth", block: "center" });
 }

@@ -8,6 +8,7 @@
   --brown: #563c2d;
   --lightRedOrange: #e2beae;
   --creamy: #f1f0eb;
+  --blue: #005fcc;
 }
 
 * {
@@ -142,6 +143,15 @@ input[type="text"]:focus {
   text-decoration: none;
 }
 
+.card__title--anchor.highlighted {
+  color: red;
+}
+
+.card__title--anchor:focus {
+  outline: auto 1px var(--blue);
+  outline-offset: 1px;
+}
+
 .card__title--anchor::before {
   content: " \01F4CE";
   position: absolute;
@@ -225,4 +235,8 @@ input[type="text"]:focus {
 .search-ctrl .close-btn {
   height: 2rem;
   margin-left: 0.5rem;
+}
+
+.matched-count {
+  font-weight: 300;
 }
