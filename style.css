@@ -200,9 +200,17 @@ input[type="text"]:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 2rem;
-  padding: 1rem 4rem;
+  padding: 2rem 4rem 1rem;
   border-bottom: 1px solid var(--light-gray);
+  background-color: var(--off-white);
+}
+
+.search-board.fixed {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 999;
+  box-shadow: 0 5px 1rem rgba(0, 0, 0, 0.4), 0 5px 7rem rgba(0, 0, 0, 0.8);
 }
 
 .search-box {

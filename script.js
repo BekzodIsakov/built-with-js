@@ -1,5 +1,6 @@
 const cardTemplate = document.getElementById("card-template");
 const cardsContainer = document.getElementById("cards-container");
+const searchBoardEl = document.getElementById("search-board");
 const searchInput = document.getElementById("search-input");
 const searchCtrlBoard = document.getElementById("search-ctrl");
 const matchedCharsCountEl = document.getElementById("matched-chars-count");
@@ -12,8 +13,12 @@ let prevMatchIndex = null;
 let lastMatchedElemIdx;
 const matchedLessonsIndices = [];
 
-window.onscroll(() => {
-  if (window.scrollY > 33) {
+// ADD THROTTLE FOR SCROLL EVENT
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 50) {
+    searchBoardEl.classList.add("fixed");
+  } else {
+    searchBoardEl.classList.remove("fixed");
   }
 });
 
