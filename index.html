@@ -1,83 +1,100 @@
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Repetition-card</title>
-    <!-- Google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100;200;300;400;500&family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
 
-    <link rel="stylesheet" href="./style.css" />
-    <script defer src="./script.js"></script>
-  </head>
-  <body>
-    <div class="cards-container" id="cards-container">
-      <!-- <div class="card">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Repetition-card</title>
+  <!-- Google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100;200;300;400;500&family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="./style.css" />
+  <script defer src="./script.js"></script>
+</head>
+
+<body>
+
+  <div class="search-board">
+    <div class="search-box">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+        viewBox="0 0 16 16">
+        <path
+          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+      </svg>
+      <input type="text" placeholder="Search by lesson" id="search-input">
+    </div>
+
+    <div class="search-ctrl hidden" id="search-ctrl">
+      <div class="search-ctrl-btns">
+        <div class="matched-count" id="matched-count">
+          <span id="matched-char-nth"></span>/<span id="matchedCharsTotal"></span>
+        </div>
+
+        <button class="icon-btn">
+          <svg class="arrow-down-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M18.5303 9.46967C18.8232 9.76256 18.8232 10.2374 18.5303 10.5303L12.5303 16.5303C12.2374 16.8232 11.7626 16.8232 11.4697 16.5303L5.46967 10.5303C5.17678 10.2374 5.17678 9.76256 5.46967 9.46967C5.76256 9.17678 6.23744 9.17678 6.53033 9.46967L12 14.9393L17.4697 9.46967C17.7626 9.17678 18.2374 9.17678 18.5303 9.46967Z"
+              fill="#030D45" />
+          </svg>
+        </button>
+
+        <button class="icon-btn">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M5.46967 14.5303C5.17678 14.2374 5.17678 13.7626 5.46967 13.4697L11.4697 7.46967C11.7626 7.17678 12.2374 7.17678 12.5303 7.46967L18.5303 13.4697C18.8232 13.7626 18.8232 14.2374 18.5303 14.5303C18.2374 14.8232 17.7626 14.8232 17.4697 14.5303L12 9.06066L6.53033 14.5303C6.23744 14.8232 5.76256 14.8232 5.46967 14.5303Z"
+              fill="#030D45" />
+          </svg>
+        </button>
+
+        <button class="icon-btn close-btn" id="search-close-btn">
+          <svg width="16px" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M8 8.707l3.646 3.647.708-.707L8.707 8l3.647-3.646-.707-.708L8 7.293 4.354 3.646l-.707.708L7.293 8l-3.646 3.646.707.708L8 8.707z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <div class="cards-container" id="cards-container"></div>
+  </main>
+
+  <!-- // Templates -->
+  <!-- /// card-template -->
+  <template id="card-template">
+    <div>
+      <div class="card">
         <div class="card__inner-wrapper">
-          <h3 class="card__title">Complete Inspections</h3>
+          <h3 class="card__title">
+            <a href="#" name="ecmascript" class="card__title--anchor"></a>
+          </h3>
           <p class="card__content">
-            Complete muiniciplity and internal inspection (foundation, framing and
-            QC).
+
           </p>
           <a href="#" class="card__link">link</a>
           <br />
-          <div class="card__tag">Ventilation</div>
-          <br />
-          <time class="date">28 Dec 2022</time>
-        </div>
-      </div>
-      </div> -->
-
-    </div>
-
-    <!-- <div class="card">
-      <div class="card__inner-wrapper">
-        <h3 class="card__title">Complete Inspections</h3>
-        <p class="card__content">
-          Complete muiniciplity and internal inspection (foundation, framing and
-          QC).
-        </p>
-        <a href="#" class="card__link">link</a>
-        <br />
-        <div class="card__tag">Ventilation</div>
-        <br />
-        <time class="date">28 Dec 2022</time>
-      </div>
-    </div> -->
-    <!-- // Templates -->
-    <!-- /// card-template -->
-
-    <template id="card-template">
-      <div>
-        <div class="card">
-          <div class="card__inner-wrapper">
-            <h3 class="card__title">
-              <a href="#" name="ecmascript" class="card__title--anchor"></a>
-            </h3>
-            <p class="card__content">
-              
-            </p>
-            <a href="#" class="card__link">link</a>
-            <br />
-            <div class="card__tag"></div>
-            <div class="date-wrapper" title="last seen">
-                <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                  <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-                  <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
-                </svg>
-              <time class="date" id="lastSeenDate"></time>
-            </div>
+          <div class="card__tag"></div>
+          <div class="date-wrapper" title="last seen">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock"
+              viewBox="0 0 16 16">
+              <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+              <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
+            </svg>
+            <time class="date" id="lastSeenDate"></time>
           </div>
         </div>
       </div>
     </div>
-    </template>
-  </body>
+    </div>
+  </template>
+</body>
+
 </html>

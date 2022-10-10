@@ -1,5 +1,13 @@
 const cardTemplate = document.getElementById("card-template");
 const cardsContainer = document.getElementById("cards-container");
+const searchInput = document.getElementById("search-input");
+const searchCtrlBoard = document.getElementById("search-ctrl");
+const matchedCharsTotalElem = document.getElementById("matchedCharsTotal");
+const matchedCharNthElem = document.getElementById("matched-char-nth");
+const searchCloseBtn = document.getElementById("search-close-btn");
+
+let matchedCharsCount = 0;
+let matchedCharNth = 0;
 
 const MONTHS_NAMES = [
   "January",
@@ -69,7 +77,7 @@ const lessons = [
   },
 ];
 
-selectRandomCard();
+// selectRandomCard();
 
 function selectRandomCard() {
   const currentRandomNum = JSON.parse(localStorage.getItem("currentRandomNum"));
@@ -81,6 +89,8 @@ function selectRandomCard() {
   lessons[randomNum].isSelected = true;
   localStorage.setItem("currentRandomNum", JSON.stringify(randomNum));
 }
+
+renderCards();
 
 function renderCards() {
   let selectedCard;
@@ -112,10 +122,37 @@ function renderCards() {
     cardsContainer.append(cardElement);
   });
 
-  selectedCard.scrollIntoView({
+  selectedCard?.scrollIntoView({
     behavior: "smooth",
     block: "start",
   });
 }
 
-renderCards();
+searchInput.addEventListener("keydown", (e) => searchByLesson(e));
+function searchByLesson(e) {
+  const searchTxt = searchInput.value.toLowerCase();
+  matchedCharsCount = 0;
+
+  if (e.key === "Enter") {
+    if (searchTxt) {
+      lessons.forEach((lesson) => {
+        if (lesson.lessonName.toLowerCase().includes(searchTxt)) {
+          matchedCharsCount++;
+        }
+      });
+
+      searchCtrlBoard.classList.remove("hidden");
+    }
+
+    matchedCharsTotalElem.innerHTML = matchedCharsCount;
+    matchedCharNth = matchedCharsCount ? 1 : 0;
+    matchedCharNthElem.innerHTML = matchedCharNth;
+  }
+}
+
+searchCloseBtn.onclick = closeSearchResult;
+
+function closeSearchResult() {
+  searchCtrlBoard.classList.add("hidden");
+  searchInput.value = "";
+}
