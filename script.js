@@ -1,26 +1,20 @@
 const cardTemplate = document.getElementById("card-template");
 const cardsContainer = document.getElementById("cards-container");
-const searchBoardEl = document.getElementById("search-board");
+// const searchBoardEl = document.getElementById("search-board");
 const searchInput = document.getElementById("search-input");
 const searchCtrlBoard = document.getElementById("search-ctrl");
 const matchedCharsCountEl = document.getElementById("matched-chars-count");
 const matchedCharNthElem = document.getElementById("matched-char-nth");
 const searchCloseBtn = document.getElementById("search-close-btn");
+const createModalEl = document.getElementById("create-modal");
+const createModalBtn = document.getElementById("create-modal-btn");
+const formCardEl = document.getElementById("form-card");
 
 let matchedCharsCount = 0;
 let currentMatchIndex = 0;
 let prevMatchIndex = null;
 let lastMatchedElemIdx;
 const matchedLessonsIndices = [];
-
-// ADD THROTTLE FOR SCROLL EVENT
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 50) {
-    searchBoardEl.classList.add("fixed");
-  } else {
-    searchBoardEl.classList.remove("fixed");
-  }
-});
 
 const MONTHS_NAMES = [
   "January",
@@ -227,3 +221,14 @@ function showNextMatch() {
   }
   showMatchedLesson();
 }
+
+createModalEl.addEventListener("click", toggleCreateModal);
+createModalBtn.addEventListener("click", toggleCreateModal);
+
+function toggleCreateModal() {
+  createModalEl.classList.toggle("hidden");
+}
+
+formCardEl.onclick = function (e) {
+  e.stopPropagation();
+};
