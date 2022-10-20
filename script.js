@@ -9,6 +9,7 @@ const searchCloseBtn = document.getElementById("search-close-btn");
 const createModalEl = document.getElementById("create-modal");
 const createModalBtn = document.getElementById("create-modal-btn");
 const formCardEl = document.getElementById("form-card");
+const modalCloseBtn = document.getElementById("modal-close-btn");
 
 let matchedCharsCount = 0;
 let currentMatchIndex = 0;
@@ -224,9 +225,11 @@ function showNextMatch() {
 
 createModalEl.addEventListener("click", toggleCreateModal);
 createModalBtn.addEventListener("click", toggleCreateModal);
+modalCloseBtn.addEventListener("click", toggleCreateModal);
 
 function toggleCreateModal() {
-  createModalEl.classList.toggle("hidden");
+  createModalEl.classList.toggle("visible");
+  // console.log((createModalEl.tabIndex = 5));
 }
 
 formCardEl.onclick = function (e) {
