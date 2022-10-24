@@ -1,91 +1,43 @@
+import { MONTHS, LESSONS } from "./assets.js";
+
+const bodyElement = document.body;
 const cardTemplate = document.getElementById("card-template");
 const cardsContainer = document.getElementById("cards-container");
-// const searchBoardEl = document.getElementById("search-board");
+const searchBoardEl = document.getElementById("search-board");
 const searchInput = document.getElementById("search-input");
 const searchCtrlBoard = document.getElementById("search-ctrl");
 const matchedCharsCountEl = document.getElementById("matched-chars-count");
 const matchedCharNthElem = document.getElementById("matched-char-nth");
-const searchCloseBtn = document.getElementById("search-close-btn");
 const createModalEl = document.getElementById("create-modal");
-const createModalBtn = document.getElementById("create-modal-btn");
 const formCardEl = document.getElementById("form-card");
-const modalCloseBtn = document.getElementById("modal-close-btn");
 
-let matchedCharsCount = 0;
+// ------- Buttons ------
+const createModalBtn = document.getElementById("create-modal-btn");
+const modalCloseBtn = document.getElementById("modal-close-btn");
+const searchCloseBtn = document.getElementById("search-close-btn");
+const showPrevSearchResultBtn = document.getElementById("showPrevSearchResult");
+const showNextSearchResultBtn = document.getElementById("showNextSearchResult");
+const scrollTopBtn = document.getElementById("scroll-top-btn");
+
 let currentMatchIndex = 0;
 let prevMatchIndex = null;
-let lastMatchedElemIdx;
 const matchedLessonsIndices = [];
 
-const MONTHS_NAMES = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-const lessons = [
-  {
-    tag: "JavaScript",
-    lessonName: "Complete Inspections",
-    linkUrl: "https://javascript.info/",
-    content:
-      "Complete muiniciplity and internal inspection (foundation, framing and QC).",
-    createdAt: "28 Dec 2022",
-    lastSeenAt: "December 28, 2022",
-    isSelected: false,
-  },
-  {
-    tag: "React",
-    lessonName: "Introduction to JavaScript",
-    linkUrl: "https://javascript.info/",
-    content:
-      "Complete muiniciplity and internal inspection (foundation, framing and QC).",
-    createdAt: "28 Dec 2022",
-    lastSeenAt: "28 Dec 2022",
-    isSelected: false,
-  },
-  {
-    tag: "React",
-    lessonName: "What's TDD?",
-    linkUrl: "https://javascript.info/",
-    content:
-      "Complete muiniciplity and internal inspection (foundation, framing and QC).",
-    createdAt: "28 Dec 2022",
-    lastSeenAt: "28 Dec 2022",
-    isSelected: false,
-  },
-  {
-    tag: "Typescript",
-    lessonName: "What's type safe language?",
-    linkUrl: "https://javascript.info/",
-    content:
-      "Complete muiniciplity and internal inspection (foundation, framing and QC).",
-    createdAt: "28 Dec 2022",
-    lastSeenAt: "28 Dec 2022",
-    isSelected: false,
-  },
-  {
-    tag: "CSS",
-    lessonName: "What's Tailwind?",
-    linkUrl: "https://javascript.info/",
-    content:
-      "Complete muiniciplity and internal inspection (foundation, framing and QC).",
-    createdAt: "28 Dec 2022",
-    lastSeenAt: "28 Dec 2022",
-    isSelected: false,
-  },
-];
-
 // selectRandomCard();
+
+bodyElement.onscroll = handleBodyScroll;
+
+function handleBodyScroll() {
+  if (window.scrollY > 65) {
+    searchBoardEl.style.boxShadow =
+      "0 0.1rem 3rem rgb(0 0 0 / 40%), 0 0 5rem rgb(0 0 0 / 50%)";
+  } else {
+    searchBoardEl.style.boxShadow = "none";
+    searchBoardEl.style.transitionDuration = "0ms";
+  }
+
+  scrollTopBtn.classList.toggle("hidden", window.scrollY < 400);
+}
 
 function selectRandomCard() {
   const currentRandomNum = JSON.parse(localStorage.getItem("currentRandomNum"));
@@ -94,7 +46,7 @@ function selectRandomCard() {
     var randomNum = Math.trunc(Math.random() * lessons.length);
   } while (randomNum === currentRandomNum);
 
-  lessons[randomNum].isSelected = true;
+  LESSONS[randomNum].isSelected = true;
   localStorage.setItem("currentRandomNum", JSON.stringify(randomNum));
 }
 
@@ -102,7 +54,7 @@ renderCards();
 
 function renderCards() {
   let selectedCard;
-  lessons.forEach((lesson) => {
+  LESSONS.forEach((lesson) => {
     const cardClone = cardTemplate.content.cloneNode(true);
     const cardElement = cardClone.querySelector(".card");
 
@@ -144,7 +96,7 @@ function searchByLesson(e) {
   if (e.key === "Enter") {
     // remove highlights from pervious search result
     if (matchedLessonsIndices.length) {
-      // if there were matches for prev search
+      // Remove highlights for prev. search matches
       const lastMatchedEl = cardsContainer.children[
         matchedLessonsIndices[currentMatchIndex]
       ].querySelector(".card__title--anchor");
@@ -153,7 +105,7 @@ function searchByLesson(e) {
 
     matchedLessonsIndices.length = 0;
     if (searchTxt) {
-      lessons.forEach((lesson, index) => {
+      LESSONS.forEach((lesson, index) => {
         if (lesson.lessonName.toLowerCase().includes(searchTxt)) {
           matchedLessonsIndices.push(index);
         }
@@ -189,6 +141,15 @@ function showMatchedLesson() {
     : 0;
 }
 
+formCardEl.onclick = function (e) {
+  e.stopPropagation();
+};
+
+scrollTopBtn.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// ----- Button events -----
 searchCloseBtn.onclick = closeSearchResult;
 
 function closeSearchResult() {
@@ -199,6 +160,10 @@ function closeSearchResult() {
   ].querySelector(".card__title--anchor");
   currentMatch.classList.remove("highlighted");
 }
+
+showPrevSearchResultBtn.addEventListener("click", () => {
+  showPrevMatch();
+});
 
 function showPrevMatch() {
   prevMatchIndex = currentMatchIndex;
@@ -211,6 +176,10 @@ function showPrevMatch() {
 
   showMatchedLesson();
 }
+
+showNextSearchResultBtn.addEventListener("click", () => {
+  showNextMatch();
+});
 
 function showNextMatch() {
   prevMatchIndex = currentMatchIndex;
@@ -229,9 +198,4 @@ modalCloseBtn.addEventListener("click", toggleCreateModal);
 
 function toggleCreateModal() {
   createModalEl.classList.toggle("visible");
-  // console.log((createModalEl.tabIndex = 5));
 }
-
-formCardEl.onclick = function (e) {
-  e.stopPropagation();
-};

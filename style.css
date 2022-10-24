@@ -70,6 +70,32 @@ input[type="checkbox"] {
   padding-inline: 0.3rem;
 }
 
+.scroll-top-btn {
+  position: fixed;
+  left: 50%;
+  bottom: 2.5%;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  color: var(--lightRedOrange);
+  border: none;
+  /* border: 0.5px solid currentColor; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--creamy);
+  transform: translateX(-50%);
+  transition-duration: 250ms;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
+}
+.scroll-top-btn > svg {
+  fill: var(--blue);
+}
+
+.scroll-top-btn:hover {
+  border-color: var(--off-white);
+}
+
 label {
   cursor: pointer;
 }
@@ -263,14 +289,13 @@ textarea:focus {
   position: sticky;
   width: 100vw;
   top: 0;
+  transition: box-shadow 250ms;
 }
 
-.search-board.fixed {
-  position: fixed;
-  /* top: 0; */
-  /* transform: translateY(0%); */
-  /* top: 0; */
-  box-shadow: 0 5px 1rem rgba(0, 0, 0, 0.4), 0 5px 7rem rgba(0, 0, 0, 0.8);
+@media only screen and (max-width: 390px) {
+  .search-board {
+    padding-inline: 2rem;
+  }
 }
 
 .search-box {
@@ -332,10 +357,6 @@ textarea:focus {
   visibility: visible;
 }
 
-.create-modal.visible .form-card {
-  transform: scale(1);
-}
-
 .form-card {
   width: min(53rem, 85%);
   max-height: 80%;
@@ -349,6 +370,10 @@ textarea:focus {
   cursor: default;
   color: var(--gray50);
   overflow: auto;
+}
+
+.create-modal.visible .form-card {
+  transform: scale(1);
 }
 
 .form-card .close-btn {
