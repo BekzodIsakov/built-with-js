@@ -429,6 +429,11 @@ select.form-ctrl {
   transition: width 0.3s, opacity 0.4s, padding 0.4s 0.15s;
 }
 
+.new-tag-wrapper.edit-tags .new-tag-input:placeholder-shown + .btn {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
 .new-tag-wrapper .btn {
   height: 34.5px;
 }

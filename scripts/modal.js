@@ -4,7 +4,6 @@ const createModalEl = document.getElementById("create-modal");
 const createModalBtn = document.getElementById("create-modal-btn");
 const modalCloseBtn = document.getElementById("modal-close-btn");
 const formWrapperEl = document.getElementById("form-wrapper");
-const newTagInput = document.getElementById("new-tag");
 const editTagsBtn = document.getElementById("edit-tags-btn");
 const newTagWrapper = document.getElementById("new-tag-wrapper");
 
@@ -12,14 +11,27 @@ const cancelEditTagBtn = document.getElementById("cancel-edit-tags");
 const tagsSelect = document.getElementById("tags-select");
 const tagsContainer = document.getElementById("tags-container");
 
+const newTagInput = document.getElementById("new-tag-input");
+
+function addNewTag() {
+  const newTagValue = newTagInput.value;
+  if (!newTagValue) return;
+  if (TAGS.some((tag) => tag.name === newTagValue)) return;
+
+  TAGS.push({ name: newTagValue });
+  newTagInput.value = "";
+  insertSelectTags();
+  renderTagsContainer();
+}
+
 insertSelectTags();
 function insertSelectTags() {
   tagsSelect.innerHTML = null;
 
   TAGS.forEach((tag) => {
     const option = document.createElement("option");
-    option.value = tag;
-    option.textContent = tag;
+    option.value = tag.name;
+    option.textContent = tag.name;
     tagsSelect.append(option);
   });
 }
@@ -44,16 +56,18 @@ newTagInput.addEventListener("click", (e) => {
 
 cancelEditTagBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  e.stopPropagation();
   newTagWrapper.classList.remove("edit-tags");
   renderTagsContainer();
 });
 
 editTagsBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  e.stopPropagation();
-  newTagWrapper.classList.add("edit-tags");
-  renderTagsContainer();
+  if (newTagWrapper.classList.contains("edit-tags")) {
+    addNewTag();
+  } else {
+    newTagWrapper.classList.add("edit-tags");
+    renderTagsContainer();
+  }
 });
 
 function renderTagsContainer() {
@@ -77,11 +91,12 @@ function appendTags() {
   TAGS.forEach((tag) => {
     const button = document.createElement("button");
     button.innerHTML = "&#10005;";
+    button.title = "delete";
     button.addEventListener("click", (e) => deleteTag(e, tag));
 
     const div = document.createElement("div");
     div.classList.add("tag-pill");
-    div.textContent = tag;
+    div.textContent = tag.name;
     div.prepend(button);
 
     tagsContainer.append(div);
@@ -92,6 +107,7 @@ function deleteTag(event, tagId) {
   event.preventDefault();
 
   const filteredTags = TAGS.filter((tag) => tagId !== tag);
+
   TAGS.length = 0;
   filteredTags.forEach((tag) => {
     TAGS.push(tag);

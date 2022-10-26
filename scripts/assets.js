@@ -68,4 +68,8 @@ const LESSONS = [
   },
 ];
 
-export const TAGS = ['JavaScript', 'React', 'NextJS'];
+export const TAGS = [
+  { name: "JavaScript" },
+  { name: "React" },
+  { name: "NextJS" },
+];
