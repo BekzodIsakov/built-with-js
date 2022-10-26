@@ -420,10 +420,10 @@ select.form-ctrl {
 
 .new-tag-wrapper > .form-ctrl {
   width: 0;
-  visibility: hidden;
+  opacity: 0;
   margin-top: 0;
   padding-inline: 0;
-  transition: width 0.3s, visibility 0.4s, padding 0.4s 0.15s;
+  transition: width 0.3s, opacity 0.4s, padding 0.4s 0.15s;
 }
 
 .new-tag-wrapper .btn {
@@ -432,10 +432,10 @@ select.form-ctrl {
 
 .new-tag-wrapper.edit-tags .form-ctrl {
   width: 50%;
-  visibility: visible;
+  opacity: 1;
   padding: 0.8rem 1rem;
   margin-right: 1rem;
-  transition: width 0.3s, visibility 0.3s;
+  transition: width 0.3s, opacity 0.3s;
 }
 
 .new-tag-wrapper .btn {
