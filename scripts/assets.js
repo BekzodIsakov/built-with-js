@@ -67,3 +67,5 @@ const LESSONS = [
     isSelected: false,
   },
 ];
+
+export const TAGS = ['JavaScript', 'React', 'NextJS'];

@@ -85,7 +85,7 @@
   </button>
 
   <div class="create-modal" id="create-modal">
-    <div class="form-card" id="form-card">
+    <div class="form-wrapper" id="form-wrapper">
       <button class="close-btn" id="modal-close-btn">
         &#10005;
       </button>
@@ -110,27 +110,25 @@
 
         <div class="form-ctrl-wrapper">
           <label for="tags">Tags</label>
-          <select name="tags" id="tags" class="form-ctrl">
-            <option class="option" value="JavaScript">JavaScript</option>
-            <option value="React">React</option>
-            <option value="CSS">CSS</option>
-          </select>
+          <select name="tags" id="tags-select" class="form-ctrl"></select>
         </div>
 
         <div class="form-ctrl-wrapper new-tag-wrapper" id="new-tag-wrapper">
-          <input id="new-tag" type="text" class="form-ctrl new-tag" placeholder="Add tag" />
-          <button id="new-tag-btn" class="btn">
-            Edit tags
-          </button>
-          <button id="cancel-edit-tags" class="btn btn-secondary hidden">
-            Cancel
-          </button>
-
-          <div class="tags-pill-container">
-            <!-- <div class="tag-pill">React</div> -->
+          <div>
+            <input id="new-tag" type="text" class="form-ctrl new-tag" placeholder="Add tag" />
+            <button id="edit-tags-btn" class="btn">
+              Edit tags
+            </button>
+            <button id="cancel-edit-tags" class="btn btn-secondary hidden">
+              Cancel
+            </button>
           </div>
+
+          <div class="tag-pills-container hidden" id="tags-container"></div>
         </div>
+
       </form>
+
     </div>
   </div>
 
