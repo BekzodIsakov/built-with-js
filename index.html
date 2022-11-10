@@ -84,7 +84,7 @@
     </svg>
   </button>
 
-  <div class="create-modal visible" id="create-modal">
+  <div class="create-modal" id="create-modal" aria='dialog' tabindex="-1">
     <div class="form-wrapper" id="form-wrapper">
       <button class="close-btn" id="modal-close-btn">
         &#10005;
@@ -127,6 +127,7 @@
           <div class="tag-pills-container hidden" id="tags-container"></div>
         </div>
 
+        <button id="create-card-btn" class="btn form-wrapper__create-btn">Create</button>
       </form>
 
     </div>
@@ -141,23 +142,39 @@
           <h3 class="card__title">
             <a href="#" class="card__title--anchor"></a>
           </h3>
-          <p class="card__content">
+          <p class="card__content"></p>
 
-          </p>
-          <a href="#" class="card__link">link</a>
-          <br />
-          <div class="card__tag"></div>
-          <div class="date-wrapper" title="last seen">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock"
-              viewBox="0 0 16 16">
-              <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-              <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-            </svg>
-            <time class="date" id="lastSeenDate"></time>
+          <div id="accordion">
+            <div class="accordion__item">
+              <h3 class="accordion__header">
+                <button type="button" class="accordion__btn" aria-expanded="false" aria-controls="accordion-content-1">
+                  Sources links
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-chevron-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                  </svg>
+                </button>
+              </h3>
+
+              <div id="accordion-content-1" class="accordion__content">
+                <a href="#" class="card__link">link</a>
+              </div>
+            </div>
+
+            <br />
+            <div class="card__tag"></div>
+            <div class="date-wrapper" title="last seen">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock"
+                viewBox="0 0 16 16">
+                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
+              </svg>
+              <time class="date" id="lastSeenDate"></time>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   </template>
 </body>

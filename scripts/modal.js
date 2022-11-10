@@ -6,6 +6,7 @@ const modalCloseBtn = document.getElementById("modal-close-btn");
 const formWrapperEl = document.getElementById("form-wrapper");
 const editTagsBtn = document.getElementById("edit-tags-btn");
 const newTagWrapper = document.getElementById("new-tag-wrapper");
+const createCardBtn = document.getElementById("create-card-btn");
 
 const cancelEditTagBtn = document.getElementById("cancel-edit-tags");
 const tagsSelect = document.getElementById("tags-select");
@@ -40,14 +41,22 @@ formWrapperEl.onclick = function (e) {
   e.stopPropagation();
 };
 
-createModalEl.addEventListener("click", toggleCreateModal);
-createModalBtn.addEventListener("click", toggleCreateModal);
-modalCloseBtn.addEventListener("click", toggleCreateModal);
+createModalBtn.addEventListener("click", openModal);
+createModalEl.addEventListener("click", closeModal);
+modalCloseBtn.addEventListener("click", closeModal);
 
-function toggleCreateModal() {
+function openModal() {
+  createModalEl.classList.add("visible");
+  createModalEl.focus();
+}
+
+function closeModal() {
   editTagsBtn.style.transitionDuration = "0ms";
   cancelEditTagBtn.style.transitionDuration = "0ms";
-  createModalEl.classList.toggle("visible");
+  createCardBtn.style.transitionDuration = "0ms";
+
+  createModalEl.classList.remove("visible");
+  createModalBtn.focus();
 }
 
 newTagInput.addEventListener("click", (e) => {

@@ -58,6 +58,7 @@ p:not(:last-child) {
   margin-bottom: 2em;
 }
 
+a[href],
 button,
 input[type="button"],
 input[type="submit"],
@@ -88,12 +89,51 @@ input[type="checkbox"] {
   transition-duration: 250ms;
   box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
 }
+
 .scroll-top-btn > svg {
   fill: var(--blue);
 }
 
 .scroll-top-btn:hover {
   border-color: var(--off-white);
+}
+
+/* Accordion */
+.accordion__item {
+  border-bottom: 1px solid var(--light-gray);
+  padding-block: 0.8rem;
+}
+
+.accordion__header {
+  margin-bottom: 0.2rem;
+}
+
+.accordion__btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-block: 0.2rem;
+  background-color: var(--light-graygray);
+  border: none;
+}
+
+.accordion__btn svg {
+  transition: transform 200ms ease-in-out;
+}
+
+.accordion__btn[aria-expanded="false"] > svg {
+  transform: rotateZ(180deg);
+}
+
+.accordion__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.3s ease-out;
+}
+
+.accordion__content .card__link {
+  padding-block: 5px;
 }
 
 label {
@@ -115,7 +155,7 @@ textarea {
 }
 
 .btn {
-  padding: 0.7rem 1.2rem;
+  padding: 1rem 1.2rem;
   border: none;
   background-color: var(--blue);
   font-size: 1.2rem;
@@ -190,19 +230,17 @@ textarea:focus {
   column-gap: 1rem;
   width: max-content;
 }
-
+/* ----- Card ---- */
 .cards-container {
   margin: 3rem 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(35rem, 1fr));
-  align-items: center;
 }
 
 .card {
   display: inline-block;
   padding: 0 3rem 3rem;
   margin-bottom: 1rem;
-  z-index: -1;
 }
 
 .card.selected {
@@ -265,7 +303,6 @@ textarea:focus {
 
 .card__link {
   display: inline-block;
-  margin-bottom: 1.7rem;
 }
 
 .card__tag {
@@ -284,15 +321,18 @@ textarea:focus {
 }
 
 .search-board {
+  position: sticky;
+  top: 0;
+  z-index: 9;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  width: 100vw;
   padding: 2rem 4rem 1rem;
   border-bottom: 1px solid var(--light-gray);
   background-color: var(--off-white);
-  position: sticky;
-  width: 100vw;
-  top: 0;
   transition: box-shadow 250ms;
 }
 
@@ -344,6 +384,7 @@ textarea:focus {
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: 99;
 
   display: flex;
   justify-content: center;
@@ -363,7 +404,7 @@ textarea:focus {
 
 .form-wrapper {
   width: min(53rem, 85%);
-  max-height: 80%;
+  max-height: 90%;
   padding: 2rem 1.5rem;
   border-radius: 0.3rem;
 
@@ -487,4 +528,9 @@ select.form-ctrl {
 
 .tag-pill:hover > button {
   opacity: 1;
+}
+
+.form-wrapper__create-btn {
+  font-size: 1.4rem;
+  background-image: linear-gradient(to left, var(--blue), var(--orange));
 }
