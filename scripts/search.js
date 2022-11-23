@@ -1,4 +1,6 @@
 import { LESSONS } from "./assets.js";
+// don't hide search-bar on scroll down when there are seach results
+export let doesSearchHaveResult = false;
 
 const searchCtrlBoard = document.getElementById("search-ctrl");
 const matchedCharsCountEl = document.getElementById("matched-chars-count");
@@ -21,11 +23,10 @@ function searchByLesson(e) {
   if (e.key === "Enter") {
     // remove highlights for pervious search result
     if (matchedLessonsIndices.length) {
-      // Remove highlights for prev. search matches
       const lastMatchedEl = cardsContainer.children[
         matchedLessonsIndices[currentMatchIndex]
-      ].querySelector(".card__title--anchor");
-      lastMatchedEl.classList.remove("highlighted");
+      ]?.querySelector(".card__title--anchor");
+      lastMatchedEl?.classList.remove("highlighted");
     }
 
     matchedLessonsIndices.length = 0;
@@ -43,7 +44,10 @@ function searchByLesson(e) {
   }
 }
 
+
+
 function showMatchedLesson() {
+  // remove highlight from prev match
   if (prevMatchIndex !== null && matchedLessonsIndices.length) {
     const prevMatch = cardsContainer.children[
       matchedLessonsIndices[prevMatchIndex]
@@ -52,12 +56,15 @@ function showMatchedLesson() {
   }
 
   if (matchedLessonsIndices.length) {
+    doesSearchHaveResult = true;
     const anchorTitle = cardsContainer.children[
       matchedLessonsIndices[currentMatchIndex]
     ].querySelector(".card__title--anchor");
 
     anchorTitle.classList.add("highlighted");
     anchorTitle.scrollIntoView({ behavior: "smooth", block: "center" });
+  } else {
+    doesSearchHaveResult = false;
   }
 
   matchedCharsCountEl.innerHTML = matchedLessonsIndices.length;
@@ -68,6 +75,7 @@ function showMatchedLesson() {
 
 searchCloseBtn.addEventListener("click", closeSearchResult);
 function closeSearchResult() {
+  doesSearchHaveResult = false;
   searchCtrlBoard.classList.add("hidden");
   searchInput.value = "";
   const currentMatch = cardsContainer.children[

@@ -271,7 +271,7 @@ textarea:focus {
 
 .card__inner-wrapper {
   border-top: 0.1em solid var(--gray);
-  padding-top: 3rem;
+  padding-block: 3rem;
 }
 
 .card.selected .card__inner-wrapper {

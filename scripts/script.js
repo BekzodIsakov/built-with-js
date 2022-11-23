@@ -1,4 +1,5 @@
 import { LESSONS } from "./assets.js";
+import { doesSearchHaveResult } from "./search.js";
 
 const cardTemplate = document.getElementById("card-template");
 const cardsContainer = document.getElementById("cards-container");
@@ -81,18 +82,21 @@ function selectRandomCard() {
 }
 
 let scrollPos = 0;
-window.onscroll = handleBodyScroll;
+// {passive: true} for smooth scrolling on touchstart and touchmove events for touch screens
+window.addEventListener("scroll", handleBodyScroll, { passive: true });
 function handleBodyScroll() {
   if (window.scrollY >= 129) {
-    // hide the element
-    $searchBoard.style.setProperty(
-      "--transformBy",
-      `-${$searchBoard.offsetHeight}px`
-    );
+    // hide search-bar if there're no results for search
+    if (!doesSearchHaveResult) {
+      $searchBoard.style.setProperty(
+        "--transformBy",
+        `-${$searchBoard.offsetHeight}px`
+      );
+    }
     $searchBoard.style.boxShadow =
       "0 0.1rem 3rem rgb(0 0 0 / 40%), 0 0 5rem rgb(0 0 0 / 50%)";
 
-    // when page scrolls up
+    // show search-bar on scroll up
     if (document.body.getBoundingClientRect().top > scrollPos) {
       $searchBoard.style.setProperty("--transformBy", "0px");
     }
