@@ -9,6 +9,8 @@
   --lightRedOrange: #e2beae;
   --creamy: #f1f0eb;
   --blue: #0063fe;
+
+  --border-radius: 0.3rem;
 }
 
 * {
@@ -90,6 +92,10 @@ input[type="checkbox"] {
   box-shadow: 0 0 2rem rgba(0, 0, 0, 0.2);
 }
 
+.new-link-btn {
+  margin-top: 0.8rem;
+}
+
 .scroll-top-btn > svg {
   fill: var(--blue);
 }
@@ -98,15 +104,21 @@ input[type="checkbox"] {
   border-color: var(--off-white);
 }
 
-/* Accordion */
+/* ------ UTILITIES ----- */
+/* -------- Margin -------- */
+/* .m-block {
+  margin-block: ;
+} */
+
+/* ------ Accordion ------- */
 .accordion__item {
   border-bottom: 1px solid var(--light-gray);
   padding-block: 0.8rem;
 }
 
-.accordion__header {
+/* .accordion__header {
   margin-bottom: 0.2rem;
-}
+} */
 
 .accordion__btn {
   display: flex;
@@ -160,8 +172,13 @@ textarea {
   background-color: var(--blue);
   font-size: 1.2rem;
   color: var(--creamy);
-  border-radius: 0.3rem;
+  border-radius: var(--border-radius);
   transition-duration: 200ms;
+}
+
+button.btn-small {
+  padding: 0.6rem 1rem;
+  font-size: 1.2rem;
 }
 
 .btn-secondary {
@@ -177,7 +194,7 @@ textarea {
   opacity: 0.7;
 }
 
-.create-btn {
+.new-card-btn {
   padding-inline: 2rem;
 }
 
@@ -228,7 +245,11 @@ textarea:focus {
   display: flex;
   align-items: center;
   column-gap: 1rem;
+  font-size: 1.4rem;
+  font-family: "Noto Sans Mono", sans-serif;
+
   width: max-content;
+  margin-top: 2rem;
 }
 /* ----- Card ---- */
 .cards-container {
@@ -239,7 +260,7 @@ textarea:focus {
 
 .card {
   display: inline-block;
-  padding: 0 3rem 3rem;
+  padding-inline: 3rem;
   margin-bottom: 1rem;
 }
 
@@ -305,7 +326,11 @@ textarea:focus {
   display: inline-block;
 }
 
-.card__tag {
+.card .tag-pills-wrapper {
+  margin-top: 1.8rem;
+}
+
+/* .card__tag {
   display: inline-block;
   padding: 1rem 1.5rem;
   margin-bottom: 1.7rem;
@@ -314,13 +339,14 @@ textarea:focus {
   font-family: "Noto Sans Mono", sans-serif;
   font-weight: 500;
   color: var(--black);
-}
+} */
 
 .card time {
   color: var(--gray);
 }
 
 .search-board {
+  --transformBy: 0;
   position: sticky;
   top: 0;
   z-index: 9;
@@ -333,7 +359,8 @@ textarea:focus {
   padding: 2rem 4rem 1rem;
   border-bottom: 1px solid var(--light-gray);
   background-color: var(--off-white);
-  transition: box-shadow 250ms;
+  transform: translateY(var(--transformBy));
+  transition-duration: 0.25s;
 }
 
 @media only screen and (max-width: 390px) {
@@ -378,7 +405,8 @@ textarea:focus {
   font-weight: 300;
 }
 
-.create-modal {
+/* ------ New card modal -------- */
+.new-card-modal {
   position: fixed;
   top: 0;
   right: 0;
@@ -397,7 +425,7 @@ textarea:focus {
   transition: opacity 0.25s 0s;
 }
 
-.create-modal.visible {
+.new-card-modal.visible {
   opacity: 1;
   visibility: visible;
 }
@@ -406,7 +434,7 @@ textarea:focus {
   width: min(53rem, 85%);
   max-height: 90%;
   padding: 2rem 1.5rem;
-  border-radius: 0.3rem;
+  border-radius: var(--border-radius);
 
   transition: transform ease-out 150ms;
   transform: scale(0.7);
@@ -417,10 +445,11 @@ textarea:focus {
   overflow: auto;
 }
 
-.create-modal.visible .form-wrapper {
+.new-card-modal.visible .form-wrapper {
   transform: scale(1);
 }
 
+/* ------- FORM ------- */
 .form-wrapper .close-btn {
   position: absolute;
   top: 0.8rem;
@@ -430,7 +459,7 @@ textarea:focus {
 .form-wrapper form {
   display: flex;
   flex-direction: column;
-  row-gap: 2rem;
+  row-gap: 1rem;
 }
 
 .form-wrapper h3 {
@@ -439,6 +468,10 @@ textarea:focus {
   margin-bottom: 1rem;
 }
 
+/* ------- FORM__CONTROL ------- */
+.form-ctrl-wrapper:not(:last-child) {
+  margin-bottom: 1rem;
+}
 .form-ctrl-wrapper label {
   font-size: 1.4rem;
 }
@@ -450,9 +483,32 @@ select.form-ctrl {
   margin-top: 0.4rem;
   width: 100%;
   box-shadow: 0 0 1px 1px var(--light-gray);
-  border-radius: 0.3rem;
+  border-radius: var(--border-radius);
 }
 
+.new-link-fieldset {
+  position: relative;
+  border: 0.15rem solid var(--light-gray);
+  padding: 1.5rem 1rem;
+  border-radius: var(--border-radius);
+}
+
+.new-link-fieldset legend {
+  font-weight: 600;
+  position: absolute;
+  top: 0;
+  left: 0.5rem;
+  transform: translateY(-50%);
+  background-color: var(--off-white);
+  padding-inline: 0.5rem;
+  line-height: 1.2;
+}
+
+.new-link-fieldset .form-ctrl-wrapper:first-child {
+  margin-bottom: 1rem;
+}
+
+/* ------- TAGS ------- */
 .new-tag-wrapper {
   position: relative;
 }
@@ -491,7 +547,7 @@ select.form-ctrl {
   margin-right: 0.5rem;
 }
 
-.tag-pills-container {
+.tag-pills-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -501,7 +557,7 @@ select.form-ctrl {
 .tag-pill {
   background-color: var(--light-gray);
   padding: 0.5rem 0.8rem;
-  border-radius: 0.3rem;
+  border-radius: var(--border-radius);
   font-size: 1.2rem;
   position: relative;
   font-family: "Noto Sans Mono", sans-serif;

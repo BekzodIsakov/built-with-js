@@ -1,10 +1,10 @@
 import { TAGS } from "./assets.js";
 
-const createModalEl = document.getElementById("create-modal");
-const createModalBtn = document.getElementById("create-modal-btn");
+const $newCardModal = document.getElementById("new-card-modal");
+const $newCardBtn = document.getElementById("new-card-btn");
 const modalCloseBtn = document.getElementById("modal-close-btn");
 const formWrapperEl = document.getElementById("form-wrapper");
-const editTagsBtn = document.getElementById("edit-tags-btn");
+const $editTagsBtn = document.getElementById("edit-tags-btn");
 const newTagWrapper = document.getElementById("new-tag-wrapper");
 const createCardBtn = document.getElementById("create-card-btn");
 
@@ -41,22 +41,22 @@ formWrapperEl.onclick = function (e) {
   e.stopPropagation();
 };
 
-createModalBtn.addEventListener("click", openModal);
-createModalEl.addEventListener("click", closeModal);
+$newCardBtn.addEventListener("click", openModal);
+$newCardModal.addEventListener("click", closeModal);
 modalCloseBtn.addEventListener("click", closeModal);
 
 function openModal() {
-  createModalEl.classList.add("visible");
-  createModalEl.focus();
+  $newCardModal.classList.add("visible");
+  $newCardModal.focus();
 }
 
 function closeModal() {
-  editTagsBtn.style.transitionDuration = "0ms";
+  $editTagsBtn.style.transitionDuration = "0ms";
   cancelEditTagBtn.style.transitionDuration = "0ms";
   createCardBtn.style.transitionDuration = "0ms";
 
-  createModalEl.classList.remove("visible");
-  createModalBtn.focus();
+  $newCardModal.classList.remove("visible");
+  $newCardBtn.focus();
 }
 
 newTagInput.addEventListener("click", (e) => {
@@ -69,7 +69,7 @@ cancelEditTagBtn.addEventListener("click", (e) => {
   renderTagsContainer();
 });
 
-editTagsBtn.addEventListener("click", (e) => {
+$editTagsBtn.addEventListener("click", (e) => {
   e.preventDefault();
   if (newTagWrapper.classList.contains("edit-tags")) {
     addNewTag();
@@ -82,13 +82,13 @@ editTagsBtn.addEventListener("click", (e) => {
 function renderTagsContainer() {
   if (newTagWrapper.classList.contains("edit-tags")) {
     cancelEditTagBtn.classList.remove("hidden");
-    editTagsBtn.innerHTML = "<span>&#65291;</span>Add";
+    $editTagsBtn.innerHTML = "<span>&#65291;</span>Add";
     newTagInput.focus();
 
     tagsContainer.classList.remove("hidden");
     appendTags();
   } else {
-    editTagsBtn.textContent = "Edit tags";
+    $editTagsBtn.textContent = "Edit tags";
     cancelEditTagBtn.classList.add("hidden");
     tagsContainer.classList.add("hidden");
   }

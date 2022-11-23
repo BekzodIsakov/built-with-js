@@ -1,9 +1,8 @@
 import { LESSONS } from "./assets.js";
 
-const bodyElement = document.body;
 const cardTemplate = document.getElementById("card-template");
 const cardsContainer = document.getElementById("cards-container");
-const searchBoardEl = document.getElementById("search-board");
+const $searchBoard = document.getElementById("search-board");
 const scrollTopBtn = document.getElementById("scroll-top-btn");
 
 renderCards();
@@ -29,8 +28,8 @@ function createCard(lesson) {
 
   const cardContent = cardElement.querySelector(".card__content");
   const cardLink = cardElement.querySelector(".card__link");
-  const cardTag = cardElement.querySelector(".card__tag");
-  const lastSeenDate = cardElement.querySelector("#lastSeenDate");
+  const cardTag = cardElement.querySelector(".tag-pill");
+  const $lastSeenAt = cardElement.querySelector("#last-seen-date");
 
   const accordion = cardElement.querySelector("#accordion");
   accordion.querySelectorAll(".accordion__btn").forEach((btn) => {
@@ -57,7 +56,7 @@ function createCard(lesson) {
   cardContent.innerHTML = lesson.content;
   cardLink.href = lesson.linkUrl;
   cardTag.innerHTML = lesson.tag;
-  lastSeenDate.innerHTML = lesson.lastSeenAt;
+  $lastSeenAt.innerHTML = lesson.lastSeenAt;
 
   if (lesson.isSelected) {
     cardElement.classList.add("selected");
@@ -81,14 +80,26 @@ function selectRandomCard() {
   localStorage.setItem("currentRandomNum", JSON.stringify(randomNum));
 }
 
-bodyElement.onscroll = handleBodyScroll;
+let scrollPos = 0;
+window.onscroll = handleBodyScroll;
 function handleBodyScroll() {
-  if (window.scrollY > 65) {
-    searchBoardEl.style.boxShadow =
+  if (window.scrollY >= 129) {
+    // hide the element
+    $searchBoard.style.setProperty(
+      "--transformBy",
+      `-${$searchBoard.offsetHeight}px`
+    );
+    $searchBoard.style.boxShadow =
       "0 0.1rem 3rem rgb(0 0 0 / 40%), 0 0 5rem rgb(0 0 0 / 50%)";
+
+    // when page scrolls up
+    if (document.body.getBoundingClientRect().top > scrollPos) {
+      $searchBoard.style.setProperty("--transformBy", "0px");
+    }
+
+    scrollPos = document.body.getBoundingClientRect().top;
   } else {
-    searchBoardEl.style.boxShadow = "none";
-    searchBoardEl.style.transitionDuration = "0ms";
+    $searchBoard.style.boxShadow = "";
   }
 
   scrollTopBtn.classList.toggle("hidden", window.scrollY < 400);
