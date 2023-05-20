@@ -1,1 +1,1 @@
-![Alt text](/assets/screenshot.png "Optional title")
+![Alt text](./assets/screenshot.png)
