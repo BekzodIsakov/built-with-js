@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revision card</title>
+  <!-- Google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100;200;300;400;500&family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="./style.css" />
+  <script type="module" src="./scripts/script.js"></script>
+  <script type="module" src="./scripts/assets.js"></script>
+  <script type="module" src="./scripts/modal.js"></script>
+  <script type="module" src="./scripts/search.js"></script>
+</head>
+
+<body>
+  <header>
+    <div>header</div>
+    <div class="create-btn-wrapper">
+      <button class="btn new-card-btn" id="new-card-btn">New card</button>
+    </div>
+  </header>
+
+  <div class="search-board" id="search-board">
+    <div class="search-box">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+        viewBox="0 0 16 16">
+        <path
+          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+      </svg>
+      <input type="text" placeholder="Search by lesson" id="search-input">
+    </div>
+
+    <div class="search-ctrl hidden" id="search-ctrl">
+      <div class="search-ctrl-btns">
+        <div class="matched-count" id="matched-count">
+          <span id="matched-char-nth"></span>
+          /
+          <span id="matched-chars-count"></span>
+        </div>
+        <button class="icon-btn" id="showPrevSearchResult">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M5.46967 14.5303C5.17678 14.2374 5.17678 13.7626 5.46967 13.4697L11.4697 7.46967C11.7626 7.17678 12.2374 7.17678 12.5303 7.46967L18.5303 13.4697C18.8232 13.7626 18.8232 14.2374 18.5303 14.5303C18.2374 14.8232 17.7626 14.8232 17.4697 14.5303L12 9.06066L6.53033 14.5303C6.23744 14.8232 5.76256 14.8232 5.46967 14.5303Z"
+              fill="#030D45" />
+          </svg>
+        </button>
+
+        <button class="icon-btn" id="showNextSearchResult">
+          <svg class="arrow-down-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M18.5303 9.46967C18.8232 9.76256 18.8232 10.2374 18.5303 10.5303L12.5303 16.5303C12.2374 16.8232 11.7626 16.8232 11.4697 16.5303L5.46967 10.5303C5.17678 10.2374 5.17678 9.76256 5.46967 9.46967C5.76256 9.17678 6.23744 9.17678 6.53033 9.46967L12 14.9393L17.4697 9.46967C17.7626 9.17678 18.2374 9.17678 18.5303 9.46967Z"
+              fill="#030D45" />
+          </svg>
+        </button>
+
+        <button class="icon-btn close-btn" id="search-close-btn">
+          <svg width="16px" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M8 8.707l3.646 3.647.708-.707L8.707 8l3.647-3.646-.707-.708L8 7.293 4.354 3.646l-.707.708L7.293 8l-3.646 3.646.707.708L8 8.707z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <div class="cards-container" id="cards-container"></div>
+  </main>
+
+  <button class="scroll-top-btn hidden" id="scroll-top-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-up"
+      viewBox="0 0 16 16">
+      <path fill-rule="evenodd"
+        d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5zm-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z" />
+    </svg>
+  </button>
+
+  <div class="new-card-modal" id="new-card-modal" aria='dialog' tabindex="-1">
+    <div class="form-wrapper" id="form-wrapper">
+      <button class="close-btn" id="modal-close-btn">
+        &#10005;
+      </button>
+      <h3>New lesson</h3>
+      <form autocomplete="off">
+        <div class="form-ctrl-wrapper">
+          <label for="lesson-name">Lesson name</label>
+          <input id="lesson-name" class="form-ctrl" type="text" placeholder="Function expressions">
+        </div>
+
+        <div class="form-ctrl-wrapper">
+          <label for="lesson-text" class="lesson-name">Lesson text</label>
+          <textarea class="form-ctrl" name="lesson-text" id="lesson-text" rows="5" resize='none'
+            placeholder="There is another syntax for creating a function that is called a Function Expression. It allows us to create a new function in..."></textarea>
+        </div>
+
+        <fieldset class="new-link-fieldset">
+          <legend>Related link</legend>
+          <div class="form-ctrl-wrapper">
+            <label for="link-title">Title</label>
+            <input id="link-title" class="form-ctrl" type="text" placeholder="Lesson link">
+          </div>
+
+          <div class="form-ctrl-wrapper">
+            <label for="link-url">URL</label>
+            <input id="link-url" class="form-ctrl" type="text"
+              placeholder="https://javascript.info/function-expressions">
+          </div>
+        </fieldset>
+
+        <div class="form-ctrl-wrapper">
+          <label for="tags">Tags</label>
+          <select name="tags" id="tags-select" class="form-ctrl"></select>
+        </div>
+
+        <div class="form-ctrl-wrapper new-tag-wrapper" id="new-tag-wrapper">
+          <div>
+            <input id="new-tag-input" type="text" class="form-ctrl new-tag-input" placeholder="Add tag" />
+            <button id="edit-tags-btn" class="btn">
+              Edit tags
+            </button>
+            <button id="cancel-edit-tags" class="btn btn-secondary hidden">
+              Cancel
+            </button>
+          </div>
+
+          <div class="tag-pills-wrapper hidden" id="tags-container"></div>
+        </div>
+
+        <button id="create-card-btn" class="btn form-wrapper__create-btn">Create</button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- // Templates -->
+  <!-- /// card-template -->
+  <template id="card-template">
+    <div>
+      <div class="card">
+        <div class="card__inner-wrapper">
+          <h3 class="card__title">
+            <a href="#" class="card__title--anchor"></a>
+          </h3>
+          <p class="card__content"></p>
+
+
+          <div id="accordion">
+            <div class="accordion__item">
+              <h3 class="accordion__header">
+                <button type="button" class="accordion__btn" aria-expanded="false" aria-controls="accordion-content-1">
+                  Sources links
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-chevron-up" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                      d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                  </svg>
+                </button>
+              </h3>
+
+              <div id="accordion-content-1" class="accordion__content">
+                <a href="#" class="card__link">link</a>
+              </div>
+
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-small new-link-btn">&#65291; New link</button>
+
+          <div class="tag-pills-wrapper">
+            <div class="tag-pill"></div>
+          </div>
+
+          <div class="date-wrapper" title="last seen">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+              class="bi bi-calendar-week" viewBox="0 0 16 16">
+              <path
+                d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+              <path
+                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+            </svg>
+            <time class="date" id="last-seen-date"></time>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </template>
+</body>
+
+</html>
