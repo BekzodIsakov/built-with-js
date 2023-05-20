@@ -1,0 +1,26 @@
+[
+  {
+    "id": "123",
+    "title": "Data types in Javascript",
+    "text": "There are eight data types in Javascript.",
+    "link": {
+      "title": "javascript.info",
+      "url": "https://javascript.info/data-types"
+    },
+    "tags": ["Javascript"],
+    "createdAt": "28 Dec 2022",
+    "lastSeenAt": "30 Dec 2022"
+  },
+  {
+    "id": "456",
+    "title": "Box models",
+    "text": "Everything in CSS has a box around it, and understanding these boxes is key to being able to create more complex layouts with CSS, or to align items with other items.",
+    "link": {
+      "title": "developer.mozilla.org",
+      "url": "https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model"
+    },
+    "tags": ["CSS"],
+    "createdAt": "28 Dec 2022",
+    "lastSeenAt": "30 Dec 2022"
+  }
+]

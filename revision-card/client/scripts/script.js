@@ -1,25 +1,32 @@
 import { LESSONS } from "./assets.js";
-import { doesSearchHaveResult } from "./search.js";
+import { showSearchBar } from "./search.js";
 
 const cardTemplate = document.getElementById("card-template");
 const cardsContainer = document.getElementById("cards-container");
 const $searchBoard = document.getElementById("search-board");
 const scrollTopBtn = document.getElementById("scroll-top-btn");
 
-renderCards();
-function renderCards() {
+// render
+(async function () {
   let selectedCard;
-  LESSONS.forEach((lesson) => {
-    const card = createCard(lesson);
+  const BASE_URL = "http://localhost:8080";
+  try {
+    const response = await fetch(BASE_URL + "/cards");
+    const cards = await response.json();
+    cards.forEach((lesson) => {
+      const card = createCard(lesson);
 
-    cardsContainer.append(card);
-  });
+      cardsContainer.append(card);
+    });
 
-  selectedCard?.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
-}
+    selectedCard?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  } catch (error) {
+    console.error(error);
+  }
+})();
 
 function createCard(lesson) {
   const cardClone = cardTemplate.content.cloneNode(true);
@@ -51,12 +58,14 @@ function createCard(lesson) {
     }
   }
 
-  titleAnchor.innerHTML = lesson.lessonName;
-  titleAnchor.href = "#" + lesson.lessonName.replace(/\s/g, "-");
+  titleAnchor.innerHTML = lesson.title;
+  // Replace empty space with '-'(dash)
+  titleAnchor.href = "#" + lesson.title.replace(/\s/g, "-");
 
-  cardContent.innerHTML = lesson.content;
-  cardLink.href = lesson.linkUrl;
-  cardTag.innerHTML = lesson.tag;
+  cardContent.innerHTML = lesson.text;
+  cardLink.textContent = lesson.link?.title || "Link";
+  cardLink.href = lesson.link?.url;
+  cardTag.innerHTML = lesson.tags[0];
   $lastSeenAt.innerHTML = lesson.lastSeenAt;
 
   if (lesson.isSelected) {
@@ -87,7 +96,7 @@ window.addEventListener("scroll", handleBodyScroll, { passive: true });
 function handleBodyScroll() {
   if (window.scrollY >= 129) {
     // hide search-bar if there're no results for search
-    if (!doesSearchHaveResult) {
+    if (!showSearchBar) {
       $searchBoard.style.setProperty(
         "--transformBy",
         `-${$searchBoard.offsetHeight}px`
